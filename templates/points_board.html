@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club's Points Board | GUDLFT</title>
+</head>
+<body>
+    <h2>List of Clubs and their associated current points</h2>
+        <table >
+            <tr>
+                <th style="border:1px solid black">Club's name</td>
+                <th style="border:1px solid black">Points available</td>
+            </tr>
+        {% for club in clubs %}
+            
+            <tr>
+                <td style="border:1px solid black">{{club['name']}}</td>
+                <td style="border:1px solid black">{{club['points']}}</td>
+            </tr>
+            {% endfor %}
+        </table>    
+</body>
+</html>
