@@ -4,19 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club's Points Board | GUDLFT</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <h2>List of Clubs and their associated current points</h2>
         <table >
             <tr>
-                <th style="border:1px solid black">Club's name</td>
-                <th style="border:1px solid black">Points available</td>
+                <th>Club's name</td>
+                <th>Points available</td>
             </tr>
         {% for club in clubs %}
             
             <tr>
-                <td style="border:1px solid black">{{club['name']}}</td>
-                <td style="border:1px solid black">{{club['points']}}</td>
+                <td>{{club['name']}}</td>
+                <td>{{club['points']}}</td>
             </tr>
             {% endfor %}
         </table>    
