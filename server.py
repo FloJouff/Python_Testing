@@ -34,6 +34,7 @@ def showSummary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition, club):
+
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
     if foundClub and foundCompetition:
@@ -48,8 +49,12 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
-    flash('Great-booking complete!')
+    if placesRequired <= int(competition["numberOfPlaces"]) and placesRequired <= int(club["points"]):
+        competition["numberOfPlaces"] = int(competition["numberOfPlaces"]) - placesRequired
+        club["points"] = int(club["points"]) - placesRequired
+        flash("Great-booking complete!")
+    else:
+        flash("Not enought points or places available.")
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
