@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, flash, url_for
 
 
@@ -19,16 +20,21 @@ app.secret_key = 'something_special'
 
 competitions = loadCompetitions()
 clubs = loadClubs()
+date = datetime.now()
 
 
 @app.route('/')
 def index():
-    return render_template("index.html", clubs=clubs)
+    return render_template("index.html", clubs=clubs, date=date)
 
 
-@app.route("/showSummary", methods=["POST"])
+@app.route("/showSummary", methods=["POST", "GET"])
 def showSummary():
-    club = next((club for club in clubs if club["email"] == request.form["email"]), None)
+    if request.method == "POST":
+        email = request.form["email"]
+    else:
+        email = request.args.get("email")
+    club = next((club for club in clubs if club["email"] == email), None)
     if club is None:
         flash("Email not found. Please try again.")
         return redirect(url_for("index"))
@@ -38,14 +44,19 @@ def showSummary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition, club):
+    foundClub = next((c for c in clubs if c["name"] == club), None)
+    foundCompetition = next((c for c in competitions if c["name"] == competition), None)
 
-    foundClub = [c for c in clubs if c['name'] == club][0]
-    foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    if foundClub and foundCompetition:
+    if not foundClub or not foundCompetition:
+        flash("Something went wrong-please try again")
+        return redirect(url_for("index"))
+
+    comp_date = datetime.strptime(foundCompetition["date"], "%Y-%m-%d %H:%M:%S")
+    if comp_date >= datetime.now():
         return render_template("booking.html", club=foundClub, competition=foundCompetition)
     else:
-        flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+        flash("You can't book past competition")
+        return redirect(url_for("showSummary", email=foundClub["email"]))
 
 
 @app.route("/purchasePlaces", methods=["POST"])
@@ -62,7 +73,6 @@ def purchasePlaces():
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
-# TODO: Add route for points display
 @app.route("/pointsBoard/")
 def pointsBoard():
     return render_template("points_board.html", clubs=clubs)
