@@ -19,7 +19,7 @@ def setup_data():
         "numberOfPlaces": "10",
     }
 
-    competitions.extend([test_competition])
+    competitions.append(test_competition)
 
     test_club = {"name": "TestClub", "email": "test@example.com", "points": "10"}
     clubs.append(test_club)
@@ -52,10 +52,6 @@ def test_points_update(client, setup_data):
 
     assert b"Great-booking complete!" in response.data
 
-    clubs.pop()
-    competitions.pop()
-
-
 def test_not_enought_points(client):
     competition_name = "Test Competition"
     club_name = "Test Club"
@@ -73,7 +69,6 @@ def test_not_enought_points(client):
     )
 
     assert response.status_code == 200
-    print(response.data)
     competition = [c for c in competitions if c["name"] == competition_name][-1]
     club = [c for c in clubs if c["name"] == club_name][-1]
     assert competition["numberOfPlaces"] == initial_competition_places
