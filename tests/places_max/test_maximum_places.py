@@ -27,8 +27,8 @@ def setup_data():
     yield
 
     # Nettoyage après les tests
-    competitions[:] = [comp for comp in competitions if comp["name"] != "TestCompetition"]
-    clubs[:] = [club for club in clubs if club["name"] != "TestClub"]
+    competitions.remove(test_competition)
+    clubs.remove(test_club)
 
 
 def test_purchase_more_than_12_places(client, setup_data):

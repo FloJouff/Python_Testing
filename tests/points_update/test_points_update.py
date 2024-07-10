@@ -65,7 +65,9 @@ def test_not_enought_points(client):
     )
 
     response = client.post(
-        "/purchasePlaces", data={"competition": competition_name, "club": club_name, "places": places_to_book}
+        "/purchasePlaces",
+        data={"competition": competition_name, "club": club_name, "places": places_to_book},
+        follow_redirects=True,
     )
 
     assert response.status_code == 200
@@ -93,7 +95,9 @@ def test_not_enought_places(client):
     )
 
     response = client.post(
-        "/purchasePlaces", data={"competition": competition_name, "club": club_name, "places": places_to_book}
+        "/purchasePlaces",
+        data={"competition": competition_name, "club": club_name, "places": places_to_book},
+        follow_redirects=True,
     )
 
     assert response.status_code == 200
