@@ -10,6 +10,7 @@ def client():
 
 
 def test_logout_url(client):
+    """Test if user can correctly logout"""
     test_email = "john@simplylift.co"
     response = client.post("/showSummary", data={"email": test_email})
     assert response.status_code == 200

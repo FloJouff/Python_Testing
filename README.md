@@ -1,10 +1,10 @@
 # gudlift-registration
 
 ![Python](https://img.shields.io/badge/python-3.12.x-green.svg)
-![Flask](https://img.shields.io/badge/Flask-3.0.3.x-green.svg)
-![Pytest](https://img.shields.io/badge/Pytest-8.2.2.x-blue.svg)
-![Locust](https://img.shields.io/badge/Locust-2.29.1.x-darkgreen.svg)
-![Coverage](https://img.shields.io/badge/Coverage-7.5.4.x-blueviolet.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0.x-green.svg)
+![Pytest](https://img.shields.io/badge/Pytest-8.2.x-blue.svg)
+![Locust](https://img.shields.io/badge/Locust-2.29.x-darkgreen.svg)
+![Coverage](https://img.shields.io/badge/Coverage-7.5.x-blueviolet.svg)
 
 
 1. Why

@@ -6,5 +6,4 @@ lib
 __pycache__
 venv/
 .coveragerc
-.coveragerc
 /htmlcov/

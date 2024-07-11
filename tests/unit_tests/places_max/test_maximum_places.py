@@ -32,6 +32,7 @@ def setup_data():
 
 
 def test_purchase_more_than_12_places(client, setup_data):
+    """When an identified user try to book more than 12 places in one time"""
     response = client.post(
         "/purchasePlaces",
         data={"competition": "TestCompetition", "club": "TestClub", "places": "13"},
@@ -43,6 +44,7 @@ def test_purchase_more_than_12_places(client, setup_data):
 
 
 def test_cumulative_booking_more_than_12_places(client, setup_data):
+    """When an identified user try to book more than 12 places in more than one time"""
     # Book 8 places first
     response = client.post(
         "/purchasePlaces",

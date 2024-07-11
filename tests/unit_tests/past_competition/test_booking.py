@@ -36,6 +36,7 @@ def setup_data():
 
 
 def test_book_future_competition(client, setup_data):
+    """Test if an identified user can book a incomming competition"""
     response = client.get("/book/FutureCompetition/TestClub")
     assert response.status_code == 200
     response = client.post(
@@ -45,6 +46,10 @@ def test_book_future_competition(client, setup_data):
 
 
 def test_book_past_competition(client, setup_data):
+    """
+    Test when an identified user book a past competition
+
+    """
     response = client.get("/book/PastCompetition/TestClub", follow_redirects=True)
     assert response.status_code == 200
     response = client.get("/showSummary", data={"email": "test@example.com"})
@@ -53,6 +58,10 @@ def test_book_past_competition(client, setup_data):
 
 
 def test_book_nonexistent_competition(client, setup_data):
+    """
+    Test when an identified user try to book a non existent competition
+
+    """
     response = client.get("/book/NonexistentCompetition/TestClub")
     assert response.status_code == 302  # Redirection
     response = client.get(response.location)
@@ -60,6 +69,10 @@ def test_book_nonexistent_competition(client, setup_data):
 
 
 def test_book_nonexistent_club(client, setup_data):
+    """
+    Test when an identified user from an unknown club try to book a competition
+
+    """
     response = client.get("/book/FutureCompetition/NonexistentClub")
     assert response.status_code == 302  # Redirection
     response = client.get(response.location)

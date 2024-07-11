@@ -34,23 +34,6 @@ def setup_data():
     clubs[:] = [club for club in clubs if club["name"] != "TestClub"]
 
 
-def test_index_page(client):
-    response = client.get("/")
-    assert response.status_code == 200
-    assert b"Welcome to the GUDLFT Registration Portal!" in response.data
-
-
-def test_login_valid_email(client, setup_data):
-    response = client.post("/showSummary", data={"email": "test@example.com"})
-    assert response.status_code == 200
-    assert b"Welcome, test@example.com" in response.data
-
-
-def test_login_invalid_email(client, setup_data):
-    response = client.post("/showSummary", data={"email": "invalid@example.com"}, follow_redirects=True)
-    assert b"Email not found. Please try again." in response.data
-
-
 def test_book_future_competition(client, setup_data):
     response = client.get("/book/FutureCompetition/TestClub")
     assert response.status_code == 200

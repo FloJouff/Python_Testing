@@ -32,6 +32,7 @@ def setup_data():
 
 
 def test_points_update(client, setup_data):
+    """When a user books places, the remaining club's points must be updated"""
     competition = [c for c in competitions if c["name"] == "TestCompetition"][0]
     club = [c for c in clubs if c["name"] == "TestClub"][0]
     initial_competition_places = int(competition["numberOfPlaces"])
@@ -52,7 +53,9 @@ def test_points_update(client, setup_data):
 
     assert b"Great-booking complete!" in response.data
 
+
 def test_not_enought_points(client):
+    """When a user books more places than club's points, an flash message should appear"""
     competition_name = "Test Competition"
     club_name = "Test Club"
     initial_competition_places = 10
@@ -83,6 +86,7 @@ def test_not_enought_points(client):
 
 
 def test_not_enought_places(client):
+    """When a user books more places than competition's available points, an flash message should appear"""
     competition_name = "Test Competition"
     club_name = "Test Club"
     initial_competition_places = 5
