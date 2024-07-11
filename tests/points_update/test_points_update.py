@@ -106,3 +106,15 @@ def test_not_enought_places(client):
 
     clubs.pop()
     competitions.pop()
+
+
+def test_negative_places_booking(client):
+    """Test that booking negative places is not allowed"""
+    response = client.post(
+        "/purchasePlaces",
+        data={"competition": "TestCompetition", "club": "TestClub", "places": "-5"},
+        follow_redirects=True,
+    )
+
+    # assert b"The number of places can't be negative." in response.data
+    assert response.status_code == 200

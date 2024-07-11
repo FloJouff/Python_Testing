@@ -64,6 +64,9 @@ def purchasePlaces():
     competition = next((c for c in competitions if c["name"] == request.form["competition"]), None)
     club = next((c for c in clubs if c["name"] == request.form["club"]), None)
     placesRequired = int(request.form['places'])
+    if placesRequired < 0:
+        flash("The number of places can't be negative.")
+        return redirect(url_for("book", competition=request.form["competition"], club=request.form["club"]))
     if competition and club:
         if "reservations" not in competition:
             competition["reservations"] = {}
