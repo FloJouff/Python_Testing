@@ -1,5 +1,11 @@
 # gudlift-registration
 
+![Python](https://img.shields.io/badge/python-3.12.x-green.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0.x-green.svg)
+![Pytest](https://img.shields.io/badge/Pytest-8.2.x-blue.svg)
+![Locust](https://img.shields.io/badge/Locust-2.29.x-darkgreen.svg)
+![Coverage](https://img.shields.io/badge/Coverage-7.5.x-blueviolet.svg)
+
 1. Why
 
 
@@ -44,8 +50,40 @@
 
 5. Testing
 
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
+    (all the following instructions suppose that your virtual environnement is launched)
+    (to run all the tests properly, you must use QA branch)
 
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+    The tests are carried out using Pytest.
+    To do this, type the following instruction:
+    You must install pytest and the other library needed:
+        <code>pip install pytest flask-testing</code>
 
+    You can run pytest by typing the following command in the terminal:
+        <code>pytest</code>
+
+    You can use the same command to run integration and functional tests.
+
+    To measure the coverage of the project, use pip to install the coverage library in the terminal:
+        <code>pip install coverage pytest-cov</code>
+
+    Then type the following command from the terminal:
+        <code>pytest --cov=.</code>
+
+    If you want to exclude the /tests files you can create the following file at the root of the project:
+        <code>.coveragerc</code>
+    
+    then add the following code to exclude a directory :
+        <code>[run]
+                omit = chemin_du_répertoire/* </code>
+
+    An html coverage report is available in the Github repository
+
+    You can also realize a performance test using locust.
+    Before starting to create your first performance test, you need to install Locust on your environment using the command:
+        <code>pip install locust</code>
+    
+    The locust script is available in the following directory: /tests/performance_tests/locustfile.py
+
+    You can test it by opening a terminal on this directory and type <code>locust</code> in the terminal
+
+    open your navigator on the following url: [here](http://localhost:8089) to see locust's web interface.
