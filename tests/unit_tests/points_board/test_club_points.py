@@ -24,7 +24,7 @@ def load_data():
 
     yield
 
-    # Optionally, clear the data after the test if needed
+    # Optionally, clear the data after the test
     clubs.clear()
     competitions.clear()
 

@@ -1,5 +1,4 @@
 from locust import HttpUser, TaskSet, task, between
-import json
 from datetime import datetime, timedelta
 
 
@@ -9,23 +8,27 @@ class WebsiteTasks(TaskSet):
         self.club = {"name": "TestClub", "email": self.email, "points": "100"}
         self.future_competition = {
             "name": "FutureCompetition",
-            "date": (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S"),
+            "date": (datetime.now() + timedelta(days=30)).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            ),
             "numberOfPlaces": "20",
         }
         self.past_competition = {
             "name": "PastCompetition",
-            "date": (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S"),
+            "date": (datetime.now() - timedelta(days=30)).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            ),
             "numberOfPlaces": "10",
         }
         self.competitions = [self.future_competition, self.past_competition]
 
-        # Create necessary setup for the test
-        self.create_setup()
+    #     # Create necessary setup for the test
+    #     self.create_setup()
 
-    def create_setup(self):
-        self.client.post("/setup_club", json=self.club)
-        self.client.post("/setup_competition", json=self.future_competition)
-        self.client.post("/setup_competition", json=self.past_competition)
+    # def create_setup(self):
+    #     self.client.post("/setup_club", json=self.club)
+    #     self.client.post("/setup_competition", json=self.future_competition)
+    #     self.client.post("/setup_competition", json=self.past_competition)
 
     @task
     def index(self):
@@ -37,17 +40,25 @@ class WebsiteTasks(TaskSet):
 
     @task
     def book_future_competition(self):
-        self.client.get(f"/book/{self.future_competition['name']}/{self.club['name']}")
+        self.client.get(
+            f"/book/{self.future_competition['name']}/{self.club['name']}"
+        )
 
     @task
     def book_past_competition(self):
-        self.client.get(f"/book/{self.past_competition['name']}/{self.club['name']}")
+        self.client.get(
+            f"/book/{self.past_competition['name']}/{self.club['name']}"
+        )
 
     @task
     def purchase_places(self):
         self.client.post(
             "/purchasePlaces",
-            data={"competition": self.future_competition["name"], "club": self.club["name"], "places": "5"},
+            data={
+                "competition": self.future_competition["name"],
+                "club": self.club["name"],
+                "places": "5",
+            },
         )
 
     @task

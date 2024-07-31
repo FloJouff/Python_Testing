@@ -1,5 +1,5 @@
 import pytest
-from server import app, clubs, competitions
+from server import app
 
 
 @pytest.fixture

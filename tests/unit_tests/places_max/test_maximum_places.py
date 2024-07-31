@@ -26,7 +26,7 @@ def setup_data():
 
     yield
 
-    # Nettoyage après les tests
+    # Clear after tests
     competitions.remove(test_competition)
     clubs.remove(test_club)
 

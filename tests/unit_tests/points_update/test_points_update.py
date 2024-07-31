@@ -26,7 +26,7 @@ def setup_data():
 
     yield
 
-    # Nettoyage après les tests
+    # Clear after tests
     competitions[:] = [comp for comp in competitions if comp["name"] != "TestCompetition"]
     clubs[:] = [club for club in clubs if club["name"] != "TestClub"]
 

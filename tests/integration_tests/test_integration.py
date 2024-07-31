@@ -1,3 +1,4 @@
+# UTF-8
 import pytest
 from datetime import datetime, timedelta
 from server import app, competitions, clubs
@@ -41,9 +42,12 @@ def test_book_future_competition(client, setup_data):
 
 
 def test_book_past_competition(client, setup_data):
-    response = client.get("/book/PastCompetition/TestClub")
-    assert response.status_code == 302
-    # assert b"You can't book past competition" in response.data
+    response = client.get(
+        "/book/PastCompetition/TestClub", follow_redirects=True
+    )
+    print(response.data)
+    assert response.status_code == 200
+    assert b"You can t book past competition" in response.data
 
 
 def test_book_nonexistent_competition(client, setup_data):
