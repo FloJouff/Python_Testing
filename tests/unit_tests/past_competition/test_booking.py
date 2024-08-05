@@ -67,6 +67,7 @@ def test_book_past_competition(client, setup_data):
         "/book/PastCompetition/TestClub", follow_redirects=True
     )
     assert response.status_code == 200
+    assert b"You can t book past competition" in response.data
     response = client.get("/showSummary", data={"email": "test@example.com"})
     assert response.status_code == 302
 

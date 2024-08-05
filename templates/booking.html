@@ -3,6 +3,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking for {{competition['name']}} || GUDLFT</title>
+    <script>
+        function validatePlaces() {
+            const placesInput = document.getElementById('places');
+            const submitButton = document.getElementById('submit-button');
+
+            const places = parseInt(placesInput.value);
+
+            if (places > 12 || places <= 0)  {
+                submitButton.disabled = true;
+
+            } else {
+                submitButton.disabled = false;
+            }
+        }
+    </script>
 </head>
 <body>
     <h2>{{competition['name']}}</h2>
@@ -10,8 +25,9 @@
     <form action="/purchasePlaces" method="post">
         <input type="hidden" name="club" value="{{club['name']}}">
         <input type="hidden" name="competition" value="{{competition['name']}}">
-        <label for="places">How many places?</label><input type="number" name="places" id=""/>
-        <button type="submit">Book</button>
+        <label for="places">How many places?</label>
+        <input type="number" name="places" id="places" value="1" min="1" max="12" oninput="validatePlaces()"/>
+        <button type="submit" id="submit-button">Book</button>
     </form>
     {% with messages = get_flashed_messages() %}
         {% if messages %}

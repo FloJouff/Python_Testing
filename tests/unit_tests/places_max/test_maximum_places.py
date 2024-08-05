@@ -39,7 +39,7 @@ def test_purchase_more_than_12_places(client, setup_data):
         follow_redirects=True,
     )
 
-    assert b"You cannot book more than 12 places in total for a competition." in response.data
+    assert b"You cannot book more than 12 places." in response.data
     assert response.status_code == 200
 
 
