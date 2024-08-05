@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Welcome to the GUDLFT Registration Portal!</h1>
-    <p> le {{ date }}</p>
+    <p> {{ date }}</p>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class=flashes>
@@ -22,6 +22,6 @@
         <input type="email" name="email" id=""/>
         <button type="submit">Enter</button>
     </form>
-    <a href="/pointsBoard">Display Club's points</a>
+    <a href="/pointsBoard">Display Clubs's points</a>
 </body>
 </html>

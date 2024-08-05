@@ -25,13 +25,13 @@ def setup_data():
 
     yield
 
-    # Nettoyage après les tests
+    # Clear after tests
     competitions[:] = [comp for comp in competitions if comp["name"] != "TestCompetition"]
     clubs[:] = [club for club in clubs if club["name"] != "TestClub"]
 
 
-def test_showSummary_url(client):
-    test_email = "john@simplylift.co"
+def test_showSummary_url(client, setup_data):
+    test_email = "test@example.com"
     response = client.post("/showSummary", data={"email": test_email})
 
     assert response.status_code == 200

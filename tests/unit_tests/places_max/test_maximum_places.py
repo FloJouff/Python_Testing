@@ -26,23 +26,25 @@ def setup_data():
 
     yield
 
-    # Nettoyage après les tests
-    competitions[:] = [comp for comp in competitions if comp["name"] != "TestCompetition"]
-    clubs[:] = [club for club in clubs if club["name"] != "TestClub"]
+    # Clear after tests
+    competitions.remove(test_competition)
+    clubs.remove(test_club)
 
 
 def test_purchase_more_than_12_places(client, setup_data):
+    """When an identified user try to book more than 12 places in one time"""
     response = client.post(
         "/purchasePlaces",
         data={"competition": "TestCompetition", "club": "TestClub", "places": "13"},
         follow_redirects=True,
     )
 
-    assert b"You cannot book more than 12 places in total for a competition." in response.data
+    assert b"You cannot book more than 12 places." in response.data
     assert response.status_code == 200
 
 
 def test_cumulative_booking_more_than_12_places(client, setup_data):
+    """When an identified user try to book more than 12 places in more than one time"""
     # Book 8 places first
     response = client.post(
         "/purchasePlaces",

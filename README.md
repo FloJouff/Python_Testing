@@ -1,11 +1,5 @@
 # gudlift-registration
 
-![Python](https://img.shields.io/badge/python-3.12.x-green.svg)
-![Flask](https://img.shields.io/badge/Flask-3.0.x-green.svg)
-![Pytest](https://img.shields.io/badge/Pytest-8.2.x-blue.svg)
-![Locust](https://img.shields.io/badge/Locust-2.29.x-darkgreen.svg)
-![Coverage](https://img.shields.io/badge/Coverage-7.5.x-blueviolet.svg)
-
 1. Why
 
 
@@ -54,7 +48,6 @@
 5. Testing
 
     (all the following instructions suppose that your virtual environnement is launched)
-    (to run all the tests properly, you must use QA branch)
 
     The tests are carried out using Pytest.
     To do this, type the following instruction:
@@ -90,3 +83,4 @@
     You can test it by opening a terminal on this directory and type <code>locust</code> in the terminal
 
     open your navigator on the following url: [here](http://localhost:8089) to see locust's web interface.
+

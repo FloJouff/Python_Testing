@@ -10,6 +10,9 @@ def client():
 
 
 def test_login_url(client):
+    """
+    Test login page when a correct email is given
+    """
     test_email = "john@simplylift.co"
     response = client.post("/showSummary", data={"email": test_email})
 
@@ -18,6 +21,9 @@ def test_login_url(client):
 
 
 def test_unknown_email(client):
+    """
+    Test login page when an incorrect email is given
+    """
     unknown_email = "unknown@club.com"
     response = client.post("/showSummary", data={"email": unknown_email})
     assert response.status_code == 302
